@@ -1,0 +1,385 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: #000;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+  }
+  
+  .circle1,
+  .circle2 {
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); 
+    opacity: 0.7; 
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+  
+ 
+  .circle1 {
+    width: 8em; 
+    height: 8em; 
+    background: radial-gradient(circle, #d84869, #f46641); /* Changed to radial gradient for a smoother look */
+    top: 10%; /* Adjusted position to accommodate smaller size */
+    left: 25%; /* Adjusted position to accommodate smaller size */
+    box-shadow: 0 0 30px rgba(216, 72, 105, 0.7); /* Updated shadow color with opacity */
+    animation: circle1Animate 12s ease-in-out infinite; /* Slightly faster and smoother animation */
+  }
+  
+  @keyframes circle1Animate {
+    to {
+      left: 28%; /* Adjusted to match new size and position */
+      top: 8%;
+      transform: scale(1.05); /* Slight scale for subtle movement */
+    }
+  }
+  
+  /* Adjusted .circle2 */
+  .circle2 {
+    width: 12em; /* Reduced from 19em to 12em */
+    height: 12em; /* Reduced from 19em to 12em */
+    background: radial-gradient(circle, #5648d8, #8641f4); /* Changed to radial gradient for consistency */
+    bottom: 10%; /* Adjusted position to accommodate smaller size */
+    right: 25%; /* Adjusted position to accommodate smaller size */
+    box-shadow: 0 0 30px rgba(86, 72, 216, 0.7); /* Updated shadow color with opacity */
+    animation: circle2Animate 12s ease-in-out infinite; /* Slightly faster and smoother animation */
+  }
+  
+  @keyframes circle2Animate {
+    to {
+      bottom: 12%;
+      right: 27%;
+      transform: scale(1.05); /* Slight scale for subtle movement */
+    }
+  }
+  
+  /* Wrapper and Container */
+  .wrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+  }
+  
+  .container {
+    height: 450px;
+    background: rgba(255, 255, 255, 0.1); /* Improved readability */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 20px 50px;
+    border-radius: 15px;
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    transition: box-shadow 0.3s ease; /* Removed transform transition */
+  }
+  
+  .container:hover {
+    /* Removed transform to prevent movement */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5); /* Retained box-shadow change for hover effect */
+  }
+  
+  /* Profile Image */
+  .container div:nth-child(1) {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    width: 120px; /* Adjusted to 120px as per previous feedback */
+    height: 120px; /* Adjusted to 120px as per previous feedback */
+    border-radius: 50%;
+    box-sizing: border-box;
+    overflow: hidden; /* Ensures image doesn't overflow */
+    transition: border 0.3s ease;
+  }
+  
+  .container div:nth-child(1):hover {
+    border-color: #d84869; /* Highlight on hover */
+  }
+  
+  .container div:nth-child(1) img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintains aspect ratio */
+  }
+  
+  /* User Name and Designation */
+  .userName h2 {
+    font-size: 2rem;
+    text-align: center;
+  }
+  
+  .designation h3 {
+    text-align: center;
+    color: #ffffff85;
+  }
+  
+  /* Button Group */
+  .btnGroup {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .btn {
+    border: 2px solid #ffffffb9;
+    background: transparent;
+    color: #ffffffb9;
+    cursor: pointer;
+    border-radius: 4px;
+    text-transform: capitalize;
+    padding: 9px 12px;
+    transition: all 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .btn:hover {
+    background: #ffffffb9;
+    color: #131313;
+  }
+  
+  .btnShare {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+  }
+  
+  .btnFollow {
+    width: 150px;
+  }
+  
+  .btnFollow a {
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .btnFollow:hover a {
+    color: #131313;
+  }
+  
+  /* Modal */
+  .modal {
+    color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0); /* Corrected transform property */
+    border: 2px solid #ffffff59;
+    width: 500px;
+    background: #00000088;
+    padding: 20px 25px;
+    border-radius: 20px;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    backdrop-filter: blur(10px);
+    z-index: 2; /* Elevated z-index to appear above overlay */
+  }
+  
+  .modal.active {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  
+  /* Modal Header */
+  .modalHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #ffffff88;
+  }
+  
+  .modalHeader div i {
+    font-size: 30px;
+    cursor: pointer;
+  }
+  
+  /* Icon Container */
+  .iconContainer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px; /* Added gap for better spacing */
+  }
+  
+  .icon {
+    padding: 17px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s;
+    text-decoration: none;
+  }
+  
+  .icon i {
+    font-size: 27px;
+  }
+  
+  /* Social Media Specific Styles */
+  #facebook {
+    color: #1771e6;
+    border: 1px solid #1771e6;
+  }
+  
+  #facebook:hover {
+    background-color: #1771e6;
+    color: #fff;
+  }
+  
+  #twitter {
+    color: #1c99e6;
+    border: 1px solid #1c99e6;
+  }
+  
+  #twitter:hover {
+    background-color: #1c99e6;
+    color: #fff;
+  }
+  
+  #instagram {
+    color: #cb2770;
+    border: 1px solid #cb2770;
+  }
+  
+  #instagram:hover {
+    background-color: #cb2770;
+    color: #fff;
+  }
+  
+  #whatsapp {
+    color: #2fe664;
+    border: 1px solid #2fe664;
+  }
+  
+  #whatsapp:hover {
+    background-color: #2fe664;
+    color: #fff;
+  }
+  
+  #telegram {
+    color: #0081c2;
+    border: 1px solid #0081c2;
+  }
+  
+  #telegram:hover {
+    background-color: #0081c2;
+    color: #fff;
+  }
+  
+  .active {
+    transform: scale(1);
+  }
+  
+  /* Overlay Styles */
+  .overlay {
+    position: fixed;
+    background-color: #5f5f5f83;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 1; /* Positioned below modal */
+  }
+  
+  .overlayActive {
+    opacity: 1;
+    pointer-events: initial;
+  }
+  
+  /* Media Queries for Mobile Phones */
+  @media (max-width: 480px) {
+    /* Adjust Container */
+    .container {
+      height: auto; /* Allow height to adjust based on content */
+      padding: 15px 20px;
+      max-width: 90%; /* Ensure container doesn't exceed screen width */
+    }
+  
+    /* Adjust Profile Image */
+    .container div:nth-child(1) {
+      width: 100px; /* Reduce profile image size */
+      height: 100px;
+    }
+  
+    /* Adjust Text Sizes */
+    .userName h2 {
+      font-size: 1.5rem;
+    }
+  
+    .designation h3 {
+      font-size: 1rem;
+    }
+  
+    /* Adjust Button Group */
+    .btnGroup {
+      flex-direction: column;
+      width: 100%;
+      gap: 10px;
+    }
+  
+    .btnFollow {
+      width: 100%; /* Make follow button full width */
+    }
+  
+    .btn {
+      padding: 8px 12px;
+      font-size: 0.9rem;
+    }
+  
+    /* Adjust Icons */
+    .iconContainer {
+      justify-content: center; /* Center icons on mobile */
+      gap: 10px; /* Reduce gap for better fit */
+    }
+  
+    .icon {
+      width: 28px;
+      height: 28px;
+      padding: 14px;
+    }
+  
+    .icon i {
+      font-size: 24px;
+    }
+  
+    /* Adjust Circles for Mobile */
+    .circle1,
+    .circle2 {
+      display: none; /* Hide decorative circles on mobile for cleaner view */
+    }
+  
+    /* Adjust Modal */
+    .modal {
+      width: 95%; /* Make modal width responsive */
+      padding: 15px 20px; /* Reduce padding for smaller screens */
+    }
+  
+    .modalHeader div i {
+      font-size: 24px; /* Reduce close icon size */
+    }
+  }
+  
